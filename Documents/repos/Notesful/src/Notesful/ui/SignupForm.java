@@ -23,12 +23,16 @@ public class SignupForm extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         bg = new javax.swing.JPanel();
-        LUsername = new javax.swing.JLabel();
-        LPassword = new javax.swing.JLabel();
-        UserTextField = new javax.swing.JTextField();
-        SubmitButton = new javax.swing.JButton();
+        SignupLabel = new javax.swing.JLabel();
+        SignupButton = new javax.swing.JButton();
+        UsernameTextField = new javax.swing.JTextField();
+        UsernameLabel = new javax.swing.JLabel();
+        PasswordLabel = new javax.swing.JLabel();
         PasswordField = new javax.swing.JPasswordField();
-        jLabel1 = new javax.swing.JLabel();
+        ComfirmPasswordLabel = new javax.swing.JLabel();
+        ComfirmPasswordField = new javax.swing.JPasswordField();
+        QuestionLabel = new javax.swing.JLabel();
+        LoginLabel2 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -46,92 +50,77 @@ public class SignupForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Notesful");
         setAlwaysOnTop(true);
+        setName("SignupFrame"); // NOI18N
 
         bg.setBackground(new java.awt.Color(51, 51, 51));
+        bg.setAutoscrolls(true);
+        bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        LUsername.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        LUsername.setForeground(new java.awt.Color(255, 255, 255));
-        LUsername.setText("Username:");
+        SignupLabel.setFont(new java.awt.Font("SansSerif", 1, 48)); // NOI18N
+        SignupLabel.setText("Sign Up");
+        bg.add(SignupLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, -1, -1));
 
-        LPassword.setFont(new java.awt.Font("Calibri", 0, 12)); // NOI18N
-        LPassword.setForeground(new java.awt.Color(255, 255, 255));
-        LPassword.setText("Password:");
-
-        UserTextField.setSelectionColor(new java.awt.Color(83, 103, 169));
-
-        SubmitButton.setText("Submit");
-        SubmitButton.addActionListener(new java.awt.event.ActionListener() {
+        SignupButton.setText("Sign up");
+        SignupButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SubmitButtonActionPerformed(evt);
+                SignupButtonActionPerformed(evt);
             }
         });
+        bg.add(SignupButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 270, -1, -1));
+        bg.add(UsernameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 170, -1));
 
-        PasswordField.setSelectionColor(new java.awt.Color(83, 103, 169));
+        UsernameLabel.setText("Username:");
+        bg.add(UsernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 110, -1, -1));
 
-        jLabel1.setFont(new java.awt.Font("Bahnschrift", 1, 48)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Sign up");
-        jLabel1.setToolTipText("");
+        PasswordLabel.setText("Password");
+        bg.add(PasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 160, -1, -1));
+        bg.add(PasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 170, -1));
 
-        javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
-        bg.setLayout(bgLayout);
-        bgLayout.setHorizontalGroup(
-            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bgLayout.createSequentialGroup()
-                .addGap(161, 161, 161)
-                .addComponent(SubmitButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bgLayout.createSequentialGroup()
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1))
-                    .addGroup(bgLayout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LUsername)
-                            .addComponent(LPassword))
-                        .addGap(3, 3, 3)
-                        .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(PasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-                            .addComponent(UserTextField, javax.swing.GroupLayout.Alignment.TRAILING))))
-                .addGap(107, 107, 107))
-        );
-        bgLayout.setVerticalGroup(
-            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bgLayout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LUsername)
-                    .addComponent(UserTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21)
-                .addGroup(bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LPassword)
-                    .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addComponent(SubmitButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(102, 102, 102))
-        );
+        ComfirmPasswordLabel.setText("Comfirm Password");
+        bg.add(ComfirmPasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 210, -1, -1));
+        bg.add(ComfirmPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, 170, -1));
+
+        QuestionLabel.setText("Have an account?");
+        bg.add(QuestionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 320, -1, -1));
+
+        LoginLabel2.setForeground(new java.awt.Color(0, 102, 255));
+        LoginLabel2.setText("Login");
+        LoginLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                LoginLabel2MouseClicked(evt);
+            }
+        });
+        bg.add(LoginLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 551, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(567, 382));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void SubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitButtonActionPerformed
-        String getUser = UserTextField.getText();
-        
-    }//GEN-LAST:event_SubmitButtonActionPerformed
+    private void SignupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignupButtonActionPerformed
+        // Sign up button
+    }//GEN-LAST:event_SignupButtonActionPerformed
+
+    private void LoginLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginLabel2MouseClicked
+        LoginForm lf = new LoginForm();
+        lf.setVisible(true);
+        lf.pack();
+        lf.setLocationRelativeTo(null);
+        lf.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.dispose();
+    }//GEN-LAST:event_LoginLabel2MouseClicked
 
     /**
      * @param args the command line arguments
@@ -170,13 +159,17 @@ public class SignupForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel LPassword;
-    private javax.swing.JLabel LUsername;
+    private javax.swing.JPasswordField ComfirmPasswordField;
+    private javax.swing.JLabel ComfirmPasswordLabel;
+    private javax.swing.JLabel LoginLabel2;
     private javax.swing.JPasswordField PasswordField;
-    private javax.swing.JButton SubmitButton;
-    private javax.swing.JTextField UserTextField;
+    private javax.swing.JLabel PasswordLabel;
+    private javax.swing.JLabel QuestionLabel;
+    private javax.swing.JButton SignupButton;
+    private javax.swing.JLabel SignupLabel;
+    private javax.swing.JLabel UsernameLabel;
+    private javax.swing.JTextField UsernameTextField;
     private javax.swing.JPanel bg;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
