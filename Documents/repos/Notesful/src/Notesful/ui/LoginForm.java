@@ -3,6 +3,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Notesful.ui;
+import Notesful.db.DBException;
+import Notesful.db.DBUtil;
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
+import java.sql.SQLException;
+import java.sql.Connection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,9 +35,9 @@ public class LoginForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        bg = new javax.swing.JPanel();
         SignupLabel = new javax.swing.JLabel();
-        SignupButton = new javax.swing.JButton();
+        LoginButton = new javax.swing.JButton();
         UsernameTextField = new javax.swing.JTextField();
         UsernameLabel = new javax.swing.JLabel();
         PasswordLabel = new javax.swing.JLabel();
@@ -39,26 +48,46 @@ public class LoginForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Notesful");
         setName("LoginFrame"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(550, 370));
+        setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel1.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
-        jPanel1.setMinimumSize(new java.awt.Dimension(550, 353));
+        bg.setBackground(new java.awt.Color(51, 51, 51));
+        bg.setMaximumSize(new java.awt.Dimension(2147483647, 2147483647));
+        bg.setMinimumSize(new java.awt.Dimension(360, 336));
+        bg.setPreferredSize(new java.awt.Dimension(360, 336));
+        bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         SignupLabel.setFont(new java.awt.Font("SansSerif", 1, 48)); // NOI18N
+        SignupLabel.setForeground(new java.awt.Color(255, 255, 255));
         SignupLabel.setText("Login");
+        SignupLabel.setMaximumSize(new java.awt.Dimension(180, 62));
+        SignupLabel.setMinimumSize(new java.awt.Dimension(180, 62));
+        SignupLabel.setPreferredSize(new java.awt.Dimension(180, 62));
+        bg.add(SignupLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 34, -1, -1));
 
-        SignupButton.setText("Login");
-        SignupButton.addActionListener(new java.awt.event.ActionListener() {
+        LoginButton.setBackground(new java.awt.Color(102, 102, 102));
+        LoginButton.setForeground(new java.awt.Color(255, 255, 255));
+        LoginButton.setText("Login");
+        LoginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SignupButtonActionPerformed(evt);
+                LoginButtonActionPerformed(evt);
             }
         });
+        bg.add(LoginButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(226, 234, -1, -1));
+        bg.add(UsernameTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 144, 170, -1));
 
+        UsernameLabel.setForeground(new java.awt.Color(255, 255, 255));
         UsernameLabel.setText("Username:");
+        bg.add(UsernameLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 124, -1, -1));
 
-        PasswordLabel.setText("Password");
+        PasswordLabel.setForeground(new java.awt.Color(255, 255, 255));
+        PasswordLabel.setText("Password:");
+        bg.add(PasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 174, -1, -1));
+        bg.add(PasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(178, 194, 170, -1));
 
+        QuestionLabel.setForeground(new java.awt.Color(255, 255, 255));
         QuestionLabel.setText("Don't have an account? ");
+        bg.add(QuestionLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 270, -1, -1));
 
         SignupLabel2.setForeground(new java.awt.Color(0, 102, 255));
         SignupLabel2.setText("Signup");
@@ -67,71 +96,58 @@ public class LoginForm extends javax.swing.JFrame {
                 SignupLabel2MouseClicked(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(197, 197, 197)
-                        .addComponent(SignupLabel))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(232, 232, 232)
-                        .addComponent(SignupButton))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(185, 185, 185)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(UsernameLabel)
-                            .addComponent(UsernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(PasswordLabel)
-                            .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(QuestionLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(SignupLabel2)))))
-                .addContainerGap(195, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(SignupLabel)
-                .addGap(28, 28, 28)
-                .addComponent(UsernameLabel)
-                .addGap(4, 4, 4)
-                .addComponent(UsernameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
-                .addComponent(PasswordLabel)
-                .addGap(4, 4, 4)
-                .addComponent(PasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(SignupButton)
-                .addGap(31, 31, 31)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(QuestionLabel)
-                    .addComponent(SignupLabel2))
-                .addContainerGap(32, Short.MAX_VALUE))
-        );
+        bg.add(SignupLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void SignupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignupButtonActionPerformed
-        System.out.print("Signup button clicked");
-    }//GEN-LAST:event_SignupButtonActionPerformed
+    private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
+        // Get username and password field
+        String username = UsernameTextField.getText();
+        String password = String.valueOf(PasswordField.getPassword());
+        
+        if (username.equals("")){
+            JOptionPane.showMessageDialog(null, "Please enter a username", "Notesful Error",1);
+        } else if (password.equals("")) {
+            JOptionPane.showMessageDialog(null, "Please enter a password", "Notesful Error",1);
+        } else {
+            try {
+                String query = "SELECT * FROM note_app WHERE username =? AND password =?";
+                Connection connection = DBUtil.getConnection();
+                try (PreparedStatement ps = connection.prepareStatement(query)){
+                    ps.setString(1, username);
+                    ps.setString(2, password);
+                    ResultSet rs = ps.executeQuery();
+                    if (rs.next())
+                    {
+                        MainForm mf = new MainForm();
+                        mf.setVisible(true);
+                        mf.pack();
+                        mf.setLocationRelativeTo(null);
+                        mf.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                        this.dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "No Access");
+                    }
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        } catch (DBException ex) {
+            Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
+        }}
+    }//GEN-LAST:event_LoginButtonActionPerformed
 
     private void SignupLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SignupLabel2MouseClicked
         SignupForm suf = new SignupForm();
@@ -178,14 +194,14 @@ public class LoginForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton LoginButton;
     private javax.swing.JPasswordField PasswordField;
     private javax.swing.JLabel PasswordLabel;
     private javax.swing.JLabel QuestionLabel;
-    private javax.swing.JButton SignupButton;
     private javax.swing.JLabel SignupLabel;
     private javax.swing.JLabel SignupLabel2;
     private javax.swing.JLabel UsernameLabel;
     private javax.swing.JTextField UsernameTextField;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel bg;
     // End of variables declaration//GEN-END:variables
 }
