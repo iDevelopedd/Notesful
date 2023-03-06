@@ -5,17 +5,17 @@ import java.sql.SQLException;
 
 public class DBUtil {
     
-    private static Connection connection;
+    private static Connection connection = null;
     
     private DBUtil() {}
     
     public static synchronized Connection getConnection() throws DBException {
         if (connection != null){
-            return connection;
+           return connection;
         }
         else {
             try {
-                String url = "jdbc:mysql://localhost:3306/note_app";
+                String url = "jdbc:mysql://localhost/note_app";
                 String username = "root";
                 String password = "";
                 

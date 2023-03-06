@@ -4,6 +4,8 @@
  */
 package Notesful.ui;
 
+import java.awt.Color;
+
 /**
  *
  * @author Prise
@@ -13,8 +15,21 @@ public class MainForm extends javax.swing.JFrame {
     /**
      * Creates new form MainForm
      */
+    Color DefaultColor, SelectColor;
+
     public MainForm() {
         initComponents();
+        DefaultColor = new Color(102, 102, 102);
+        SelectColor = new Color(51, 51, 51);
+
+        // Setting default color of the panels
+        NavPanel.setBackground(DefaultColor);
+        ProfilePanel.setBackground(DefaultColor);
+        HomePanel.setBackground(DefaultColor);
+        NotesPanel.setBackground(DefaultColor);
+        StudyPanel.setBackground(DefaultColor);
+        StoragePanel.setBackground(DefaultColor);
+        SettingsPanel.setBackground(DefaultColor);
     }
 
     /**
@@ -27,50 +42,410 @@ public class MainForm extends javax.swing.JFrame {
     private void initComponents() {
 
         bg = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        NavigationPanel = new javax.swing.JPanel();
+        NavPanel = new javax.swing.JPanel();
+        NavLabel = new javax.swing.JLabel();
+        ProfilePanel = new javax.swing.JPanel();
+        ProfileLabel = new javax.swing.JLabel();
+        TopSeparator = new javax.swing.JSeparator();
+        HomePanel = new javax.swing.JPanel();
+        HomeLabel = new javax.swing.JLabel();
+        NotesPanel = new javax.swing.JPanel();
+        NotesLabel = new javax.swing.JLabel();
+        StudyPanel = new javax.swing.JPanel();
+        StudyLabel = new javax.swing.JLabel();
+        StoragePanel = new javax.swing.JPanel();
+        StorageLabel = new javax.swing.JLabel();
+        BottomSeparator = new javax.swing.JSeparator();
+        SettingsPanel = new javax.swing.JPanel();
+        SettingsLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Notesful");
         setName("MainFrame"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(700, 400));
+        setSize(new java.awt.Dimension(1100, 650));
 
         bg.setBackground(new java.awt.Color(51, 51, 51));
         bg.setMinimumSize(new java.awt.Dimension(550, 353));
-        bg.setPreferredSize(new java.awt.Dimension(700, 500));
+        bg.setPreferredSize(new java.awt.Dimension(1100, 600));
+        bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setText("Welcome");
+        NavigationPanel.setBackground(new java.awt.Color(102, 102, 102));
+        NavigationPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        javax.swing.GroupLayout bgLayout = new javax.swing.GroupLayout(bg);
-        bg.setLayout(bgLayout);
-        bgLayout.setHorizontalGroup(
-            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bgLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(594, Short.MAX_VALUE))
-        );
-        bgLayout.setVerticalGroup(
-            bgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bgLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(462, Short.MAX_VALUE))
-        );
+        NavPanel.setBackground(new java.awt.Color(102, 102, 102));
+        NavPanel.setPreferredSize(new java.awt.Dimension(150, 40));
+        NavPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                NavPanelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                NavPanelMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                NavPanelMousePressed(evt);
+            }
+        });
+        NavPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        NavLabel.setFont(new java.awt.Font("Kanit", 1, 18)); // NOI18N
+        NavLabel.setForeground(new java.awt.Color(255, 255, 255));
+        NavLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/hamburgermenu.png"))); // NOI18N
+        NavPanel.add(NavLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 20, -1));
+
+        NavigationPanel.add(NavPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 40));
+
+        ProfilePanel.setBackground(new java.awt.Color(102, 102, 102));
+        ProfilePanel.setPreferredSize(new java.awt.Dimension(150, 40));
+        ProfilePanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                ProfilePanelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                ProfilePanelMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                ProfilePanelMousePressed(evt);
+            }
+        });
+        ProfilePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        ProfileLabel.setFont(new java.awt.Font("Kanit", 1, 18)); // NOI18N
+        ProfileLabel.setForeground(new java.awt.Color(255, 255, 255));
+        ProfileLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/profile.png"))); // NOI18N
+        ProfileLabel.setText("Profile");
+        ProfileLabel.setIconTextGap(10);
+        ProfilePanel.add(ProfileLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        NavigationPanel.add(ProfilePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 40, 150, 60));
+
+        TopSeparator.setBackground(new java.awt.Color(51, 51, 51));
+        TopSeparator.setForeground(new java.awt.Color(51, 51, 51));
+        TopSeparator.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        NavigationPanel.add(TopSeparator, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 150, 20));
+
+        HomePanel.setBackground(new java.awt.Color(102, 102, 102));
+        HomePanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                HomePanelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                HomePanelMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                HomePanelMousePressed(evt);
+            }
+        });
+        HomePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        HomeLabel.setFont(new java.awt.Font("Kanit", 1, 18)); // NOI18N
+        HomeLabel.setForeground(new java.awt.Color(255, 255, 255));
+        HomeLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/home.png"))); // NOI18N
+        HomeLabel.setText("Home");
+        HomeLabel.setIconTextGap(10);
+        HomeLabel.setMaximumSize(new java.awt.Dimension(110, 42));
+        HomeLabel.setMinimumSize(new java.awt.Dimension(110, 42));
+        HomePanel.add(HomeLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        NavigationPanel.add(HomePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 120, 150, 60));
+
+        NotesPanel.setBackground(new java.awt.Color(102, 102, 102));
+        NotesPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                NotesPanelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                NotesPanelMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                NotesPanelMousePressed(evt);
+            }
+        });
+        NotesPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        NotesLabel.setFont(new java.awt.Font("Kanit", 1, 18)); // NOI18N
+        NotesLabel.setForeground(new java.awt.Color(255, 255, 255));
+        NotesLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/note.png"))); // NOI18N
+        NotesLabel.setText("Notes");
+        NotesLabel.setIconTextGap(10);
+        NotesLabel.setMaximumSize(new java.awt.Dimension(110, 42));
+        NotesLabel.setMinimumSize(new java.awt.Dimension(110, 42));
+        NotesPanel.add(NotesLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        NavigationPanel.add(NotesPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 150, 60));
+
+        StudyPanel.setBackground(new java.awt.Color(102, 102, 102));
+        StudyPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                StudyPanelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                StudyPanelMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                StudyPanelMousePressed(evt);
+            }
+        });
+        StudyPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        StudyLabel.setFont(new java.awt.Font("Kanit", 1, 18)); // NOI18N
+        StudyLabel.setForeground(new java.awt.Color(255, 255, 255));
+        StudyLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/study.png"))); // NOI18N
+        StudyLabel.setText("Study");
+        StudyLabel.setIconTextGap(10);
+        StudyLabel.setMaximumSize(new java.awt.Dimension(110, 42));
+        StudyLabel.setMinimumSize(new java.awt.Dimension(110, 42));
+        StudyPanel.add(StudyLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        NavigationPanel.add(StudyPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 240, 150, 60));
+
+        StoragePanel.setBackground(new java.awt.Color(102, 102, 102));
+        StoragePanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                StoragePanelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                StoragePanelMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                StoragePanelMousePressed(evt);
+            }
+        });
+        StoragePanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        StorageLabel.setFont(new java.awt.Font("Kanit", 1, 18)); // NOI18N
+        StorageLabel.setForeground(new java.awt.Color(255, 255, 255));
+        StorageLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/storage.png"))); // NOI18N
+        StorageLabel.setText("Storage");
+        StorageLabel.setIconTextGap(10);
+        StorageLabel.setMaximumSize(new java.awt.Dimension(110, 42));
+        StorageLabel.setMinimumSize(new java.awt.Dimension(110, 42));
+        StoragePanel.add(StorageLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        NavigationPanel.add(StoragePanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 300, 150, 60));
+
+        BottomSeparator.setBackground(new java.awt.Color(51, 51, 51));
+        BottomSeparator.setForeground(new java.awt.Color(51, 51, 51));
+        BottomSeparator.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        NavigationPanel.add(BottomSeparator, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 560, 150, 20));
+
+        SettingsPanel.setBackground(new java.awt.Color(102, 102, 102));
+        SettingsPanel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                SettingsPanelMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                SettingsPanelMouseExited(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                SettingsPanelMousePressed(evt);
+            }
+        });
+        SettingsPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        SettingsLabel.setFont(new java.awt.Font("Kanit", 1, 18)); // NOI18N
+        SettingsLabel.setForeground(new java.awt.Color(255, 255, 255));
+        SettingsLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/settings.png"))); // NOI18N
+        SettingsLabel.setText("Settings");
+        SettingsLabel.setIconTextGap(10);
+        SettingsLabel.setMaximumSize(new java.awt.Dimension(110, 42));
+        SettingsLabel.setMinimumSize(new java.awt.Dimension(110, 42));
+        SettingsPanel.add(SettingsLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        NavigationPanel.add(SettingsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 570, 150, 60));
+
+        bg.add(NavigationPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 150, 630));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 630, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    // Profile Panel Functions
+    private void ProfilePanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProfilePanelMousePressed
+        System.out.println("Profile button has been clicked");
+    }//GEN-LAST:event_ProfilePanelMousePressed
+
+    private void ProfilePanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProfilePanelMouseEntered
+        // TODO add your handling code here:
+        NavPanel.setBackground(DefaultColor);
+        ProfilePanel.setBackground(SelectColor);
+        HomePanel.setBackground(DefaultColor);
+        NotesPanel.setBackground(DefaultColor);
+        StudyPanel.setBackground(DefaultColor);
+        StoragePanel.setBackground(DefaultColor);
+        SettingsPanel.setBackground(DefaultColor);
+    }//GEN-LAST:event_ProfilePanelMouseEntered
+
+    private void ProfilePanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ProfilePanelMouseExited
+        NavPanel.setBackground(DefaultColor);
+        ProfilePanel.setBackground(DefaultColor);
+        HomePanel.setBackground(DefaultColor);
+        NotesPanel.setBackground(DefaultColor);
+        StudyPanel.setBackground(DefaultColor);
+        StoragePanel.setBackground(DefaultColor);
+        SettingsPanel.setBackground(DefaultColor);
+    }//GEN-LAST:event_ProfilePanelMouseExited
+    
+    // Home Panel Functions
+    private void HomePanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomePanelMouseEntered
+        NavPanel.setBackground(DefaultColor);
+        ProfilePanel.setBackground(DefaultColor);
+        HomePanel.setBackground(SelectColor);
+        NotesPanel.setBackground(DefaultColor);
+        StudyPanel.setBackground(DefaultColor);
+        StoragePanel.setBackground(DefaultColor);
+        SettingsPanel.setBackground(DefaultColor);
+    }//GEN-LAST:event_HomePanelMouseEntered
+
+    private void HomePanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomePanelMouseExited
+        NavPanel.setBackground(DefaultColor);
+        ProfilePanel.setBackground(DefaultColor);
+        HomePanel.setBackground(DefaultColor);
+        NotesPanel.setBackground(DefaultColor);
+        StudyPanel.setBackground(DefaultColor);
+        StoragePanel.setBackground(DefaultColor);
+        SettingsPanel.setBackground(DefaultColor);
+    }//GEN-LAST:event_HomePanelMouseExited
+
+    private void HomePanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HomePanelMousePressed
+        System.out.println("Home button has been clicked");
+    }//GEN-LAST:event_HomePanelMousePressed
+
+    // Notes Panel Functions
+    private void NotesPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NotesPanelMousePressed
+        System.out.println("Notes button has been clicked");
+    }//GEN-LAST:event_NotesPanelMousePressed
+
+    private void NotesPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NotesPanelMouseEntered
+        NavPanel.setBackground(DefaultColor);
+        ProfilePanel.setBackground(DefaultColor);
+        HomePanel.setBackground(DefaultColor);
+        NotesPanel.setBackground(SelectColor);
+        StudyPanel.setBackground(DefaultColor);
+        StoragePanel.setBackground(DefaultColor);
+        SettingsPanel.setBackground(DefaultColor);
+    }//GEN-LAST:event_NotesPanelMouseEntered
+
+    private void NotesPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NotesPanelMouseExited
+        NavPanel.setBackground(DefaultColor);
+        ProfilePanel.setBackground(DefaultColor);
+        HomePanel.setBackground(DefaultColor);
+        NotesPanel.setBackground(DefaultColor);
+        StudyPanel.setBackground(DefaultColor);
+        StoragePanel.setBackground(DefaultColor);
+        SettingsPanel.setBackground(DefaultColor);
+    }//GEN-LAST:event_NotesPanelMouseExited
+    
+    // Study Panel Function
+    private void StudyPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StudyPanelMousePressed
+        System.out.println("Study button has been clicked");
+    }//GEN-LAST:event_StudyPanelMousePressed
+
+    private void StudyPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StudyPanelMouseEntered
+        NavPanel.setBackground(DefaultColor);
+        ProfilePanel.setBackground(DefaultColor);
+        HomePanel.setBackground(DefaultColor);
+        NotesPanel.setBackground(DefaultColor);
+        StudyPanel.setBackground(SelectColor);
+        StoragePanel.setBackground(DefaultColor);
+        SettingsPanel.setBackground(DefaultColor);
+    }//GEN-LAST:event_StudyPanelMouseEntered
+
+    private void StudyPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StudyPanelMouseExited
+        NavPanel.setBackground(DefaultColor);
+        ProfilePanel.setBackground(DefaultColor);
+        HomePanel.setBackground(DefaultColor);
+        NotesPanel.setBackground(DefaultColor);
+        StudyPanel.setBackground(DefaultColor);
+        StoragePanel.setBackground(DefaultColor);
+        SettingsPanel.setBackground(DefaultColor);
+    }//GEN-LAST:event_StudyPanelMouseExited
+    
+    // Storage Panel Functions
+    private void StoragePanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StoragePanelMousePressed
+        System.out.println("Storage button has been clicked");
+    }//GEN-LAST:event_StoragePanelMousePressed
+
+    private void StoragePanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StoragePanelMouseEntered
+        NavPanel.setBackground(DefaultColor);
+        ProfilePanel.setBackground(DefaultColor);
+        HomePanel.setBackground(DefaultColor);
+        NotesPanel.setBackground(DefaultColor);
+        StudyPanel.setBackground(DefaultColor);
+        StoragePanel.setBackground(SelectColor);
+        SettingsPanel.setBackground(DefaultColor);
+    }//GEN-LAST:event_StoragePanelMouseEntered
+
+    private void StoragePanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StoragePanelMouseExited
+        NavPanel.setBackground(DefaultColor);
+        ProfilePanel.setBackground(DefaultColor);
+        HomePanel.setBackground(DefaultColor);
+        NotesPanel.setBackground(DefaultColor);
+        StudyPanel.setBackground(DefaultColor);
+        StoragePanel.setBackground(DefaultColor);
+        SettingsPanel.setBackground(DefaultColor);
+    }//GEN-LAST:event_StoragePanelMouseExited
+    
+    // Settings Panel Functions
+    private void SettingsPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SettingsPanelMousePressed
+        System.out.println("Settings button has been clicked");
+    }//GEN-LAST:event_SettingsPanelMousePressed
+
+    private void SettingsPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SettingsPanelMouseEntered
+        NavPanel.setBackground(DefaultColor);
+        ProfilePanel.setBackground(DefaultColor);
+        HomePanel.setBackground(DefaultColor);
+        NotesPanel.setBackground(DefaultColor);
+        StudyPanel.setBackground(DefaultColor);
+        StoragePanel.setBackground(DefaultColor);
+        SettingsPanel.setBackground(SelectColor);
+    }//GEN-LAST:event_SettingsPanelMouseEntered
+
+    private void SettingsPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SettingsPanelMouseExited
+        NavPanel.setBackground(DefaultColor);
+        ProfilePanel.setBackground(DefaultColor);
+        HomePanel.setBackground(DefaultColor);
+        NotesPanel.setBackground(DefaultColor);
+        StudyPanel.setBackground(DefaultColor);
+        StoragePanel.setBackground(DefaultColor);
+        SettingsPanel.setBackground(DefaultColor);
+    }//GEN-LAST:event_SettingsPanelMouseExited
+    
+    // Nav Panel Functions (Hamburger icon)
+    private void NavPanelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NavPanelMousePressed
+        System.out.println("Nav button has been clicked");
+    }//GEN-LAST:event_NavPanelMousePressed
+
+    private void NavPanelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NavPanelMouseEntered
+        NavPanel.setBackground(SelectColor);
+        ProfilePanel.setBackground(DefaultColor);
+        HomePanel.setBackground(DefaultColor);
+        NotesPanel.setBackground(DefaultColor);
+        StudyPanel.setBackground(DefaultColor);
+        StoragePanel.setBackground(DefaultColor);
+        SettingsPanel.setBackground(DefaultColor);
+    }//GEN-LAST:event_NavPanelMouseEntered
+
+    private void NavPanelMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NavPanelMouseExited
+        NavPanel.setBackground(DefaultColor);
+        ProfilePanel.setBackground(DefaultColor);
+        HomePanel.setBackground(DefaultColor);
+        NotesPanel.setBackground(DefaultColor);
+        StudyPanel.setBackground(DefaultColor);
+        StoragePanel.setBackground(DefaultColor);
+        SettingsPanel.setBackground(DefaultColor);
+    }//GEN-LAST:event_NavPanelMouseExited
 
     /**
      * @param args the command line arguments
@@ -92,7 +467,23 @@ public class MainForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JSeparator BottomSeparator;
+    private javax.swing.JLabel HomeLabel;
+    private javax.swing.JPanel HomePanel;
+    private javax.swing.JLabel NavLabel;
+    private javax.swing.JPanel NavPanel;
+    private javax.swing.JPanel NavigationPanel;
+    private javax.swing.JLabel NotesLabel;
+    private javax.swing.JPanel NotesPanel;
+    private javax.swing.JLabel ProfileLabel;
+    private javax.swing.JPanel ProfilePanel;
+    private javax.swing.JLabel SettingsLabel;
+    private javax.swing.JPanel SettingsPanel;
+    private javax.swing.JLabel StorageLabel;
+    private javax.swing.JPanel StoragePanel;
+    private javax.swing.JLabel StudyLabel;
+    private javax.swing.JPanel StudyPanel;
+    private javax.swing.JSeparator TopSeparator;
     private javax.swing.JPanel bg;
-    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

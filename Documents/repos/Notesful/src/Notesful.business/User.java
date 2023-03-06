@@ -2,21 +2,13 @@ package Notesful;
 
 public class User {
     
-    private int UserId;
+    private long UserId;
     private String Username;
     private String Email;
     private String Password;
     private int Notes;
     
-    public User(String Username, String Email, String Password, int Notes)
-    {
-        this.Username = Username;
-        this.Email = Email;
-        this.Password = Password;
-        this.Notes = 0;
-    }
-    
-    public int getUserId() {
+    public long getUserId() {
         return UserId;
     }
     
