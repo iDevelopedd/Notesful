@@ -37,8 +37,8 @@ public class SignupForm extends javax.swing.JFrame {
         UsernameLabel = new javax.swing.JLabel();
         PasswordLabel = new javax.swing.JLabel();
         PasswordField = new javax.swing.JPasswordField();
-        ComfirmPasswordLabel = new javax.swing.JLabel();
-        ComfirmPasswordField = new javax.swing.JPasswordField();
+        ConfirmPasswordLabel = new javax.swing.JLabel();
+        ConfirmPasswordField = new javax.swing.JPasswordField();
         QuestionLabel = new javax.swing.JLabel();
         LoginLabel2 = new javax.swing.JLabel();
         EmailTextField = new javax.swing.JTextField();
@@ -59,8 +59,8 @@ public class SignupForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Notesful");
-        setAlwaysOnTop(true);
         setName("SignupFrame"); // NOI18N
+        setPreferredSize(new java.awt.Dimension(550, 375));
         setResizable(false);
 
         bg.setBackground(new java.awt.Color(51, 51, 51));
@@ -74,6 +74,7 @@ public class SignupForm extends javax.swing.JFrame {
         SignupButton.setBackground(new java.awt.Color(102, 102, 102));
         SignupButton.setForeground(new java.awt.Color(255, 255, 255));
         SignupButton.setText("Sign up");
+        SignupButton.setBorderPainted(false);
         SignupButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SignupButtonActionPerformed(evt);
@@ -91,10 +92,10 @@ public class SignupForm extends javax.swing.JFrame {
         bg.add(PasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, -1, -1));
         bg.add(PasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 200, 170, -1));
 
-        ComfirmPasswordLabel.setForeground(new java.awt.Color(255, 255, 255));
-        ComfirmPasswordLabel.setText("Comfirm Password:");
-        bg.add(ComfirmPasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, -1, -1));
-        bg.add(ComfirmPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 170, -1));
+        ConfirmPasswordLabel.setForeground(new java.awt.Color(255, 255, 255));
+        ConfirmPasswordLabel.setText("Confirm Password:");
+        bg.add(ConfirmPasswordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 230, -1, -1));
+        bg.add(ConfirmPasswordField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 250, 170, -1));
 
         QuestionLabel.setForeground(new java.awt.Color(255, 255, 255));
         QuestionLabel.setText("Have an account?");
@@ -107,7 +108,7 @@ public class SignupForm extends javax.swing.JFrame {
                 LoginLabel2MouseClicked(evt);
             }
         });
-        bg.add(LoginLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 320, -1, -1));
+        bg.add(LoginLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 320, -1, -1));
         bg.add(EmailTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 150, 170, -1));
 
         EmailLabel.setForeground(new java.awt.Color(255, 255, 255));
@@ -135,42 +136,22 @@ public class SignupForm extends javax.swing.JFrame {
         String username = UsernameTextField.getText();
         String email = EmailTextField.getText();
         String password = String.valueOf(PasswordField.getPassword());
-        String confirmedPassword = String.valueOf(ComfirmPasswordField.getPassword());
+        String confirmedPassword = String.valueOf(ConfirmPasswordField.getPassword());
         
         // Validation for username and password
-        if (username.equals("")){
+        if (username.isEmpty()){
             JOptionPane.showMessageDialog(null, "Please enter a username", "Notesful Error",1);
-        } else if (email.equals("")){
+        } else if (email.isEmpty()){
             JOptionPane.showMessageDialog(null, "Please enter a email", "Notesful Error",1);
-        } else if (password.equals("")){
+        } else if (password.isEmpty()){
             JOptionPane.showMessageDialog(null, "Please enter a password", "Notesful Error",1);
         } else if (!confirmedPassword.equals(password)){
-            JOptionPane.showMessageDialog(null, "Incorrect password. Must be the same password.", "Notesful Error",1);
+            JOptionPane.showMessageDialog(null, "Invalid input, password must be the same.", "Notesful Error",1);
         } else {
             try {
-                String query = "INSERT INTO user ('Username', 'Email', 'Password')";
-                Connection connection = DBUtil.getConnection();
-                try (PreparedStatement ps = connection.prepareStatement(query)){
-                    ps.setString(1, username);
-                    ps.setString(2, email);
-                    ps.setString(3, password);
-                    ResultSet rs = ps.executeQuery();
-                    if (rs.next())
-                    {
-                        MainForm mf = new MainForm();
-                        mf.setVisible(true);
-                        mf.pack();
-                        mf.setLocationRelativeTo(null);
-                        mf.setDefaultCloseOperation(EXIT_ON_CLOSE);
-                        this.dispose();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "No Access");
-                    }
-                } catch(SQLException ex) {
-                    Logger.getLogger(SignupForm.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            } catch(DBException ex) {
-                Logger.getLogger(SignupForm.class.getName()).log(Level.SEVERE, null, ex);
+                userSignup(username, email, password);
+            } catch (DBException ex) {
+                Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_SignupButtonActionPerformed
@@ -195,7 +176,7 @@ public class SignupForm extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -221,8 +202,8 @@ public class SignupForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPasswordField ComfirmPasswordField;
-    private javax.swing.JLabel ComfirmPasswordLabel;
+    private javax.swing.JPasswordField ConfirmPasswordField;
+    private javax.swing.JLabel ConfirmPasswordLabel;
     private javax.swing.JLabel EmailLabel;
     private javax.swing.JTextField EmailTextField;
     private javax.swing.JLabel LoginLabel2;
@@ -237,4 +218,32 @@ public class SignupForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    private void userSignup(String username, String email, String password) throws DBException {
+        Connection connection = DBUtil.getConnection();
+        if (connection != null){
+            try {
+                PreparedStatement ps = (PreparedStatement) connection.prepareStatement("INSERT INTO user (Username, Email, Password) VALUES (?,?,?)");
+                ps.setString(1, username);
+                ps.setString(2, email);
+                ps.setString(3, password);
+                int rs = ps.executeUpdate();
+                if (rs != 0){
+                    this.dispose();
+                    LoginForm lf = new LoginForm();
+                    lf.setVisible(true);
+                    lf.pack();
+                    lf.setLocationRelativeTo(null);
+                    lf.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Account already exist, please login.");
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Failed to connection to database");
+        }
+    }
 }

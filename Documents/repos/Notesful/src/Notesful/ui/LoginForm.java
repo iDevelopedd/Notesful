@@ -48,7 +48,7 @@ public class LoginForm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Notesful");
         setName("LoginFrame"); // NOI18N
-        setPreferredSize(new java.awt.Dimension(550, 370));
+        setPreferredSize(new java.awt.Dimension(550, 375));
         setResizable(false);
 
         bg.setBackground(new java.awt.Color(51, 51, 51));
@@ -63,11 +63,12 @@ public class LoginForm extends javax.swing.JFrame {
         SignupLabel.setMaximumSize(new java.awt.Dimension(180, 62));
         SignupLabel.setMinimumSize(new java.awt.Dimension(180, 62));
         SignupLabel.setPreferredSize(new java.awt.Dimension(180, 62));
-        bg.add(SignupLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 34, -1, -1));
+        bg.add(SignupLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 34, 150, -1));
 
         LoginButton.setBackground(new java.awt.Color(102, 102, 102));
         LoginButton.setForeground(new java.awt.Color(255, 255, 255));
         LoginButton.setText("Login");
+        LoginButton.setBorderPainted(false);
         LoginButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 LoginButtonActionPerformed(evt);
@@ -96,7 +97,7 @@ public class LoginForm extends javax.swing.JFrame {
                 SignupLabel2MouseClicked(evt);
             }
         });
-        bg.add(SignupLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 270, -1, -1));
+        bg.add(SignupLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 270, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,6 +111,7 @@ public class LoginForm extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
@@ -117,36 +119,17 @@ public class LoginForm extends javax.swing.JFrame {
         String username = UsernameTextField.getText();
         String password = String.valueOf(PasswordField.getPassword());
         
-        if (username.equals("")){
+        if (username.isEmpty()){
             JOptionPane.showMessageDialog(null, "Please enter a username", "Notesful Error",1);
-        } else if (password.equals("")) {
+        } else if (password.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Please enter a password", "Notesful Error",1);
         } else {
             try {
-                String query = "SELECT * FROM note_app WHERE username =? AND password =?";
-                Connection connection = DBUtil.getConnection();
-                try (PreparedStatement ps = connection.prepareStatement(query)){
-                    ps.setString(1, username);
-                    ps.setString(2, password);
-                    ResultSet rs = ps.executeQuery();
-                    if (rs.next())
-                    {
-                        MainForm mf = new MainForm();
-                        mf.setVisible(true);
-                        mf.pack();
-                        mf.setLocationRelativeTo(null);
-                        mf.setDefaultCloseOperation(EXIT_ON_CLOSE);
-                        this.dispose();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "No Access");
-                    }
-
-                } catch (SQLException ex) {
-                    Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        } catch (DBException ex) {
-            Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
-        }}
+                userLogin(username, password);
+            } catch (DBException ex) {
+                Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_LoginButtonActionPerformed
 
     private void SignupLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SignupLabel2MouseClicked
@@ -169,7 +152,7 @@ public class LoginForm extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -204,4 +187,31 @@ public class LoginForm extends javax.swing.JFrame {
     private javax.swing.JTextField UsernameTextField;
     private javax.swing.JPanel bg;
     // End of variables declaration//GEN-END:variables
+
+    private void userLogin(String username, String password) throws DBException {
+        Connection connection = DBUtil.getConnection();
+        if (connection != null){
+            try {
+                PreparedStatement ps = (PreparedStatement) connection.prepareStatement("SELECT * FROM user WHERE Username = ? AND Password = ?");
+                ps.setString(1, username);
+                ps.setString(2, password);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()){
+                    this.dispose();
+                    MainForm mf = new MainForm();
+                    mf.setVisible(true);
+                    mf.pack();
+                    mf.setLocationRelativeTo(null);
+                    mf.setDefaultCloseOperation(EXIT_ON_CLOSE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Username or password is invalid. Please try again.");
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(LoginForm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Failed to connection to database");
+        }
+    }
 }
